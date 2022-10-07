@@ -1,10 +1,17 @@
 import { useState, useEffect } from "react";
 import { db } from "./firebase/firebaseConfig";
-import { collection, doc, getDocs } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
+import { async } from "@firebase/util";
 
 function App() {
+  const[newName,setNewName] = useState("");
+  const[newAge,setNewAge] = useState(0)
   const [users, setUsers] = useState([]);
   const usersCollectionRef = collection(db, "users");
+
+  const createUser = async() =>{
+
+  } 
 
   useEffect(() => {
     const getUsers = async () => {
@@ -17,6 +24,9 @@ function App() {
 
   return (
     <div className="App">
+      <input placeholder="Name" onChange={(e)=> setNewName(e.target.value)} value={newName}></input>
+      <input placeholder="Age" type="number" onChange={(e)=> setNewAge(e.target.value)} value={newAge}></input>
+      <button>Add User</button>
       {users.map((user) => {
         return (
           <div key={user.id}>
