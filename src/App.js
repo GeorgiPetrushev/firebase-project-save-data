@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { db } from "./firebase/firebaseConfig";
-import { collection, getDocs, addDoc } from "firebase/firestore";
+import { collection, getDocs, addDoc,updateDoc,doc,deleteDoc } from "firebase/firestore";
 import { async } from "@firebase/util";
 
 function App() {
@@ -9,8 +9,20 @@ function App() {
   const [users, setUsers] = useState([]);
   const usersCollectionRef = collection(db, "users");
 
+  const updateUser = async (id,age) =>{ 
+    const userDoc = doc(db,"users" , id);
+    const changeAge = {age:age+1};
+    await updateDoc(userDoc,changeAge)
+
+   }
+   const deleteUser = async (id) =>{
+    const userDoc = doc(db,"users" , id);
+    await deleteDoc(userDoc)
+
+   }
+
   const createUser = async () => {
-    await addDoc(usersCollectionRef, { name: newName, age: newAge });
+    await addDoc(usersCollectionRef, { name: newName, age: Number(newAge) });
     await setNewAge(0);
     await setNewName("");
   };
@@ -22,7 +34,7 @@ function App() {
     };
 
     getUsers();
-  }, []);
+  }, [] );
 
   return (
     <div className="App">
@@ -41,7 +53,8 @@ function App() {
       {users.map((user) => {
         return (
           <div key={user.id}>
-            <div> Name: {user.name}</div> <div>Age:{user.age}</div>
+            <div> Name: {user.name}</div> <div>Age:{user.age}</div><button onClick={()=>updateUser(user.id, user.age)}>Increase Age</button>
+            <button onClick={()=>deleteUser(user.id)}>Delete User</button>
           </div>
         );
       })}
