@@ -1,6 +1,13 @@
 import { useState, useEffect } from "react";
 import { db } from "./firebase/firebaseConfig";
-import { collection, getDocs, addDoc,updateDoc,doc,deleteDoc } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  addDoc,
+  updateDoc,
+  doc,
+  deleteDoc,
+} from "firebase/firestore";
 import { async } from "@firebase/util";
 
 function App() {
@@ -9,17 +16,15 @@ function App() {
   const [users, setUsers] = useState([]);
   const usersCollectionRef = collection(db, "users");
 
-  const updateUser = async (id,age) =>{ 
-    const userDoc = doc(db,"users" , id);
-    const changeAge = {age:age+1};
-    await updateDoc(userDoc,changeAge)
-
-   }
-   const deleteUser = async (id) =>{
-    const userDoc = doc(db,"users" , id);
-    await deleteDoc(userDoc)
-
-   }
+  const updateUser = async (id, age,type) => {
+    const userDoc = doc(db, "users", id);
+    const changeAge =    type ==="up" ? { age: age + 1 } :{ age: age - 1 } 
+    await updateDoc(userDoc, changeAge);
+  };
+  const deleteUser = async (id) => {
+    const userDoc = doc(db, "users", id);
+    await deleteDoc(userDoc);
+  };
 
   const createUser = async () => {
     await addDoc(usersCollectionRef, { name: newName, age: Number(newAge) });
@@ -34,7 +39,7 @@ function App() {
     };
 
     getUsers();
-  }, [] );
+  }, [updateUser]);
 
   return (
     <div className="App">
@@ -53,8 +58,14 @@ function App() {
       {users.map((user) => {
         return (
           <div key={user.id}>
-            <div> Name: {user.name}</div> <div>Age:{user.age}</div><button onClick={()=>updateUser(user.id, user.age)}>Increase Age</button>
-            <button onClick={()=>deleteUser(user.id)}>Delete User</button>
+            <div> Name: {user.name}</div> <div>Age:{user.age}</div>
+            <button onClick={() => updateUser(user.id, user.age,"up")}>
+              Increase Age
+            </button>
+            <button onClick={() => updateUser(user.id, user.age,"down")}>
+              Decrease Age
+            </button>
+            <button onClick={() => deleteUser(user.id)}>Delete User</button>
           </div>
         );
       })}
