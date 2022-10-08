@@ -8,7 +8,6 @@ import {
   doc,
   deleteDoc,
 } from "firebase/firestore";
-import { async } from "@firebase/util";
 
 function App() {
   const [newName, setNewName] = useState("");
