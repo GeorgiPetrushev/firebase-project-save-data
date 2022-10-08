@@ -11,7 +11,7 @@ import {
 
 function App() {
   const [newName, setNewName] = useState("");
-  const [newAge, setNewAge] = useState("");
+  const [newAge, setNewAge] = useState(0);
   const [users, setUsers] = useState([]);
   const usersCollectionRef = collection(db, "users");
 
@@ -27,8 +27,8 @@ function App() {
 
   const createUser = async () => {
     await addDoc(usersCollectionRef, { name: newName, age: Number(newAge) });
-    setNewAge(0);
-    setNewName("");
+    await setNewAge(0);
+    await setNewName("");
   };
 
   useEffect(() => {
