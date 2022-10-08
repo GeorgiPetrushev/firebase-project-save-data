@@ -38,7 +38,7 @@ function App() {
     };
 
     getUsers();
-  }, []);
+  }, [updateUser]);
 
   return (
     <div className="App">
