@@ -11,13 +11,13 @@ import {
 
 function App() {
   const [newName, setNewName] = useState("");
-  const [newAge, setNewAge] = useState(0);
+  const [newAge, setNewAge] = useState("");
   const [users, setUsers] = useState([]);
   const usersCollectionRef = collection(db, "users");
 
-  const updateUser = async (id, age,type) => {
+  const updateUser = async (id, age, type) => {
     const userDoc = doc(db, "users", id);
-    const changeAge =    type ==="up" ? { age: age + 1 } :{ age: age - 1 } 
+    const changeAge = type === "up" ? { age: age + 1 } : { age: age - 1 };
     await updateDoc(userDoc, changeAge);
   };
   const deleteUser = async (id) => {
@@ -27,8 +27,8 @@ function App() {
 
   const createUser = async () => {
     await addDoc(usersCollectionRef, { name: newName, age: Number(newAge) });
-    await setNewAge(0);
-    await setNewName("");
+    setNewAge(0);
+    setNewName("");
   };
 
   useEffect(() => {
@@ -58,10 +58,10 @@ function App() {
         return (
           <div key={user.id}>
             <div> Name: {user.name}</div> <div>Age:{user.age}</div>
-            <button onClick={() => updateUser(user.id, user.age,"up")}>
+            <button onClick={() => updateUser(user.id, user.age, "up")}>
               Increase Age
             </button>
-            <button onClick={() => updateUser(user.id, user.age,"down")}>
+            <button onClick={() => updateUser(user.id, user.age, "down")}>
               Decrease Age
             </button>
             <button onClick={() => deleteUser(user.id)}>Delete User</button>
