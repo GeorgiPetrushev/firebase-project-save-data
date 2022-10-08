@@ -8,10 +8,11 @@ import {
   doc,
   deleteDoc,
 } from "firebase/firestore";
+import AppStyle from "./style/AppStyle";
 
 function App() {
   const [newName, setNewName] = useState("");
-  const [newAge, setNewAge] = useState(0);
+  const [newAge, setNewAge] = useState("");
   const [users, setUsers] = useState([]);
   const usersCollectionRef = collection(db, "users");
 
@@ -41,19 +42,21 @@ function App() {
   }, [updateUser]);
 
   return (
-    <div className="App">
-      <input
-        placeholder="Name"
-        onChange={(e) => setNewName(e.target.value)}
-        value={newName}
-      ></input>
-      <input
-        placeholder="Age"
-        type="number"
-        onChange={(e) => setNewAge(e.target.value)}
-        value={newAge}
-      ></input>
-      <button onClick={createUser}>Add User</button>
+    <AppStyle>
+      <div className="inputs">
+        <input
+          placeholder="Name"
+          onChange={(e) => setNewName(e.target.value)}
+          value={newName}
+        ></input>
+        <input
+          placeholder="Age"
+          type="number"
+          onChange={(e) => setNewAge(e.target.value)}
+          value={newAge}
+        ></input>
+        <button onClick={createUser}>Add User</button>
+      </div>
       {users.map((user) => {
         return (
           <div key={user.id}>
@@ -68,7 +71,7 @@ function App() {
           </div>
         );
       })}
-    </div>
+    </AppStyle>
   );
 }
 
