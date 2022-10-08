@@ -55,7 +55,7 @@ function App() {
           onChange={(e) => setNewAge(e.target.value)}
           value={newAge}
         ></input>
-        <button onClick={createUser}>Add User</button>
+        <button onClick={createUser}>ADD USER</button>
       </div>
       {users.map((user) => {
         return (
