@@ -20,17 +20,18 @@ function App() {
     const userDoc = doc(db, "users", id);
     const changeAge = type === "up" ? { age: age + 1 } : { age: age - 1 };
     await updateDoc(userDoc, changeAge);
+    
   };
 
-  const deleteUser = async (id) => {``
+  const deleteUser = async (id) => {
     const userDoc = doc(db, "users", id);
     await deleteDoc(userDoc);
   };
 
   const createUser = async () => {
     await addDoc(usersCollectionRef, { name: newName, age: Number(newAge) });
-    setNewAge(0);
-    setNewName("");
+     setNewAge(0);
+     setNewName("");
   };
 
   const getUsers = async () => {
@@ -38,7 +39,10 @@ function App() {
     setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
 
+
   useEffect(() => {
+
+
     getUsers();
   }, []);
 
