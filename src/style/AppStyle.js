@@ -26,7 +26,11 @@ const AppStyle = styled.div`
         font-size: 2rem;
         .user{
             color: white;
-            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            margin-bottom: 3rem;
+            border-bottom: 1px black solid;
+            width: 700px;
+            margin: auto;
         }
         .main-buttons{
            button{
