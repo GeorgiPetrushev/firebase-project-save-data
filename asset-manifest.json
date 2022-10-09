@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/firebase-project-save-data/static/css/main.754ebb54.css",
+    "main.js": "/firebase-project-save-data/static/js/main.69126f84.js",
+    "index.html": "/firebase-project-save-data/index.html",
+    "main.754ebb54.css.map": "/firebase-project-save-data/static/css/main.754ebb54.css.map",
+    "main.69126f84.js.map": "/firebase-project-save-data/static/js/main.69126f84.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.754ebb54.css",
+    "static/js/main.69126f84.js"
+  ]
+}
