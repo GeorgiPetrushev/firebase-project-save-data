@@ -21,25 +21,26 @@ function App() {
     const changeAge = type === "up" ? { age: age + 1 } : { age: age - 1 };
     await updateDoc(userDoc, changeAge);
   };
-  const deleteUser = async (id) => {
+
+  const deleteUser = async (id) => {``
     const userDoc = doc(db, "users", id);
     await deleteDoc(userDoc);
   };
 
   const createUser = async () => {
     await addDoc(usersCollectionRef, { name: newName, age: Number(newAge) });
-    await setNewAge(0);
-    await setNewName("");
+    setNewAge(0);
+    setNewName("");
+  };
+
+  const getUsers = async () => {
+    const data = await getDocs(usersCollectionRef);
+    setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
 
   useEffect(() => {
-    const getUsers = async () => {
-      const data = await getDocs(usersCollectionRef);
-      setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    };
-
     getUsers();
-  }, [updateUser]);
+  }, []);
 
   return (
     <AppStyle>
