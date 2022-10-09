@@ -22,6 +22,26 @@ const AppStyle = styled.div`
         }
         
     }
+    .main{
+        font-size: 2rem;
+        .user{
+            color: white;
+            margin-bottom: 2rem;
+        }
+        .main-buttons{
+           button{
+            margin-left:1.5rem;
+            height: 2rem;
+            border-radius: 0.3rem;
+            transition: 400ms;
+            border: none;
+            &:hover{
+                color: white;
+                background-color: black;
+            }
+           }
+        }
+    }
 `;
 
 

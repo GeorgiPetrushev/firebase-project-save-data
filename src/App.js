@@ -57,20 +57,24 @@ function App() {
         ></input>
         <button onClick={createUser}>ADD USER</button>
       </div>
-      {users.map((user) => {
-        return (
-          <div key={user.id}>
-            <div> Name: {user.name}</div> <div>Age:{user.age}</div>
-            <button onClick={() => updateUser(user.id, user.age, "up")}>
-              Increase Age
-            </button>
-            <button onClick={() => updateUser(user.id, user.age, "down")}>
-              Decrease Age
-            </button>
-            <button onClick={() => deleteUser(user.id)}>Delete User</button>
-          </div>
-        );
-      })}
+      <div className="main">
+        {users.map((user) => {
+          return (
+            <div className="user" key={user.id}>
+              <div> Name: {user.name}</div> <div>Age:{user.age}</div>
+              <div className="main-buttons">
+                <button onClick={() => updateUser(user.id, user.age, "up")}>
+                  Increase Age
+                </button>
+                <button onClick={() => updateUser(user.id, user.age, "down")}>
+                  Decrease Age
+                </button>
+                <button onClick={() => deleteUser(user.id)}>Delete User</button>
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </AppStyle>
   );
 }
